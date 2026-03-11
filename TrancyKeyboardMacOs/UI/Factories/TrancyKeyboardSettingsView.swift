@@ -123,6 +123,21 @@ struct TrancyKeyboardSettingsView: View {
                         }
                     }
                 }
+
+                Section(header: Text("Shortcut_Settings_Title".localized)) {
+                    ShortcutRecorderRow(label: "Translation_Shortcut".localized, shortcut: $settings.translationShortcut)
+                    ShortcutRecorderRow(label: "Tab_Toggle_Shortcut".localized, shortcut: $settings.tabToggleShortcut)
+
+                    Group {
+                        ShortcutInfoRow(label: "Word_Segmentation".localized, shortcut: "~ ／ ‘")
+                        ShortcutInfoRow(label: "Select_Candidate".localized, shortcut: "1 - 9")
+                        ShortcutInfoRow(label: "Select_First_Space".localized, shortcut: "Space")
+                        ShortcutInfoRow(label: "Select_Shift".localized, shortcut: "Shift")
+                        ShortcutInfoRow(label: "Input_Pinyin_Letters".localized, shortcut: "Return")
+                        ShortcutInfoRow(label: "Page_Down_Up".localized, shortcut: "- / +")
+                        ShortcutInfoRow(label: "Expand_Collapse_Bar".localized, shortcut: "[ / ]")
+                    }
+                }
             }
             .listStyle(InsetListStyle())
         }
@@ -155,5 +170,77 @@ struct PickerRow<T: Hashable, Content: View>: View {
             .frame(width: 150)
         }
         .padding(.vertical, 2)
+    }
+}
+
+struct ShortcutInfoRow: View {
+    let label: String
+    let shortcut: String
+    
+    var body: some View {
+        HStack {
+            Text(label)
+                .font(.system(size: 13))
+            Spacer()
+            Text(shortcut)
+                .font(.system(size: 12))
+                .foregroundColor(.secondary)
+        }
+        .padding(.vertical, 2)
+    }
+}
+
+struct ShortcutRecorderRow: View {
+    let label: String
+    @Binding var shortcut: KeyShortcut
+    @State private var isRecording = false
+    @State private var monitor: Any?
+
+    var body: some View {
+        HStack {
+            Text(label)
+                .font(.system(size: 13))
+            Spacer()
+            Button(action: {
+                if isRecording {
+                    stopRecording()
+                } else {
+                    startRecording()
+                }
+            }) {
+                Text(isRecording ? "Press_Key".localized : shortcut.displayName)
+                    .font(.system(size: 12, design: .monospaced))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(isRecording ? Color.blue.opacity(0.1) : Color.primary.opacity(0.05))
+                    .cornerRadius(4)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(isRecording ? Color.blue : Color.clear, lineWidth: 1)
+                    )
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .padding(.vertical, 2)
+    }
+
+    private func startRecording() {
+        isRecording = true
+        monitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown]) { event in
+            let newShortcut = KeyShortcut.from(event: event)
+            DispatchQueue.main.async {
+                self.shortcut = newShortcut
+                self.stopRecording()
+            }
+            return nil // Swallow the event
+        }
+    }
+
+    private func stopRecording() {
+        isRecording = false
+        if let monitor = monitor {
+            NSEvent.removeMonitor(monitor)
+            self.monitor = nil
+        }
     }
 }

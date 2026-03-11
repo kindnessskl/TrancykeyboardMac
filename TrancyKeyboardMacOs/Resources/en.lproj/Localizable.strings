@@ -1,0 +1,346 @@
+
+/* Settings View Buttons */
+"English_Lookup" = "English Search";
+"Double_Pinyin" = "Double Pinyin";
+"Sliding_Input" = "Glide Typing";
+"Pinyin_Correction" = "Pinyin Fix";
+"Key_Correction" = "Key Correction";
+"Fuzzy_Pinyin" = "Fuzzy Pinyin";
+"English_Correction" = "English Fix";
+"Emoji_Search" = "Emoji Search";
+"Symbol_Search" = "Symbols";
+"Auto_Suggestion" = "Auto Suggest";
+"Auto_Composition" = "Auto Split";
+"Selection_History" = "History";
+"Frequency_Adjustment" = "Frequency";
+"Candidate_Mode" = "Dual Mode";
+"Key_Sound" = "Sound";
+"Key_Vibration" = "Haptics";
+"Keyboard_Height" = "Height";
+"Keyboard_Color" = "Skin";
+"Candidate_Spacing" = "Spacing";
+"Candidate_Font_Size" = "Font Size";
+"Interface_Language" = "界面語言 Language";
+"Output_Mode" = "简繁切换";
+"Simplified" = "简体";
+"Traditional" = "繁体";
+"English_Prefix_Lookup" = "Prefix Search";
+"Chinese_Lookup" = "Chinese Search";
+/* Settings Button States */
+"Enabled" = "On";
+"Disabled" = "Off";
+"Custom" = "Custom";
+"Cloud_Sync" = "ICloud Sync";
+"Last_Sync" = "Last Sync";
+"Sort_Recent" = "Recently used";
+/* Input Modes */
+"Mode_Chinese" = "Chinese";
+"Mode_Translation" = "Translate";
+"Mode_ChinesePreview" = "Cn/En";
+"Desc_Chinese" = "Single Layer";
+"Desc_Translation" = "Long Phrase";
+"Desc_ChinesePreview" = "Dual Language";
+
+/* Layout Types */
+"Layout_Standard" = "26-Key";
+"Layout_NineGrid" = "9-Key";
+"Desc_Standard" = "Pinyin";
+"Desc_NineGrid" = "Pinyin";
+"Desc_NineGridStroke" = "Stroke";
+
+/* Dual Candidate Output Mode */
+"Dual_Mode_Default" = "Dual Layer";
+"Dual_Mode_ChineseOnly" = "1st Layer Only";
+"Dual_Mode_EnglishOnly" = "2nd Layer Only";
+
+/* Font Sizes */
+"Font_Small" = "Small";
+"Font_Medium" = "Med";
+"Font_Large" = "Large";
+
+/* Spacing */
+"Spacing_Tight" = "Tight";
+"Spacing_Normal" = "Normal";
+"Spacing_Wide" = "Wide";
+
+/* Fuzzy Pinyin Settings */
+"Fuzzy_Pinyin_Title" = "Fuzzy Pinyin Settings";
+"Category_Initial" = "Initial";
+"Category_Final" = "Final";
+"Category_Syllable" = "Syllable";
+"Category_Other" = "Other";
+
+
+/* Skin Settings */
+"Skin_Title" = "Choose Theme";
+"Skin_Default" = "Default";
+"Skin_Dark" = "Dark";
+"Skin_Custom" = "Custom";
+
+/* General */
+"Close" = "Close";
+"AppName" = "Trancy Keyboard";
+"Loading" = "Loading...";
+"Tip" = "Tip";
+"Confirm" = "OK";
+
+/* App Sections */
+"Input_Assist" = "Input Assist";
+"Appearance_Theme" = "Appearance";
+"Feedback_Settings" = "Feedback";
+"Keyboard_Settings_Title" = "Keyboard Settings";
+"Vocab_Management" = "Word Management";
+"Permission_Desc" = "Permission";
+"Setting_Path" = "Setup Path:";
+"Setting_Step" = "Settings → General → Keyboard → Trancy Keyboard → Allow Full Access";
+"Open_System_Settings" = "Open System Settings";
+
+/* Detailed Labels */
+"English_Fuzzy_Lookup" = "Fuzzy English Search";
+"English_Lookup_Detail" = "English Search";
+"Sliding_Pinyin_Correction" = "Glide Correction";
+"Candidate_Mode_Detail" = "Dual Candidate Selection";
+"Database_Error_Hint" = "Please open the main app to initialize.";
+
+/* Keyboard Keys */
+"Key_123" = "123";
+"Key_Back" = "Back";
+"Key_Space" = "Space";
+"Key_Select" = "Select";
+"Key_Pinyin" = "拼音";
+"Key_Split" = "Cut";
+"Key_Stroke_One" = "一";
+"Key_Newline" = "Enter";
+"Key_Retry" = "Retry";
+"Key_Stroke" = "Stroke";
+"Key_Wildcard" = "*";
+"Key_Separator" = "Sep";
+
+/* Actions */
+"Action_exit" = "Exit";
+"Action_Translate" = "Translate";
+"Action_Commit" = "Commit";
+"Action_Cancel" = "Cancel";
+"Action_Apply" = "Apply";
+"Action_Lock" = "Lock";
+"Action_Unlock" = "Unlock";
+"Action_Return" = "Back";
+"Action_Save" = "Save";
+"Action_Delete" = "Delete";
+"Action_GoSettings" = "Settings";
+"Action_Clear" = "Clear";
+"Action_Search" = "Search";
+"Action_New_Group" = "New Word";
+"Action_Correction" = "Correct";
+"Action_Upload_Photo" = "Upload Photo";
+"Action_Delete_Photo" = "Delete Photo";
+"Action_Feedback" = "Feedback";
+"Action_Finish" = "Done";
+"Action_Delete_Word" = "Delete Word";
+"Action_Delete_Chinese" = "Delete Chinese";
+"Action_Edit_Word" = "Edit Word";
+
+/* Sorting and Units */
+"Sort_Type" = "Sort by";
+"Sort_Frequency" = "Freq";
+"Sort_Pinyin" = "Pinyin";
+"Sort_Stroke" = "Stroke";
+"Sort_Familiarity" = "Familiarity";
+"Sort_Favorite" = "Favorite";
+"Sort_AZ" = "A-Z";
+"Sort_Date" = "Date";
+"Sort_Count" = "Count";
+"Sort_Asc" = "Asc";
+"Sort_Desc" = "Desc";
+"Stroke_Unit" = " Strk";
+"Word_Unit" = " words";
+"Day_Unit" = " days later";
+"Star_Unit" = " Stars";
+
+/* Alerts */
+"Alert_Delete_Word_Title" = "Confirm Delete Word";
+"Alert_Delete_Chinese_Title" = "Confirm Delete Chinese?";
+"Alert_Delete_Message" = "This cannot be undone. Are you sure?";
+
+/* Categories */
+"Category_Top5000" = "High Freq";
+"Category_Top15000" = "Common Words";
+"Category_Verbs" = "Common Verbs";
+"Category_Phrases" = "Phrases";
+"Category_Slang" = "Common Slang";
+"Category_Common45000" = "Common List";
+"Category_API" = "Apple Trans";
+"Category_UserAdded" = "Custom Words";
+"Category_chunk" = "chunk";
+"Category_sentence" = "short sentence";
+"Group_Range_Format" = "Words %d-%d";
+"Syncing" = "Syncing";
+/* ContentView */
+"Tab_History" = "History";
+"Tab_Wordbook" = "Book";
+"Tab_Search" = "Search";
+"Tab_Settings" = "Settings";
+"Permission_Alert_Title" = "Full Access Required";
+"Permission_Alert_Message" = "Full Access is required to record selected words, generate history, and provide personalized vocabulary review.\n\nPlease go to Settings → General → Keyboard → %@ → Allow Full Access";
+
+/* AboutView */
+"About_Title" = "About";
+"About_Section_AppDescription" = "Description";
+"About_Description_1" = "The goal of this App is simple: input is learning. It merges a vocabulary book with a Chinese input method. By recording words selected during input, it generates personalized review content, helping you intuitively understand English words you actually use.";
+"About_Description_3" = "Includes 280k+ Chinese entries, 20k+ high-frequency English words, and an 80k+ EN-CN dictionary. Powered by Apple's translation engine for accurate sentence translation.";
+"About_Section_MoreApps" = "More Apps";
+"About_Section_Acknowledgements" = "Acknowledgements";
+"About_Ack_Rime" = "Thanks to Rime-ice for Chinese vocabulary:";
+"About_Ack_TypeDuck" = "Thanks to TypeDuck for English vocabulary:";
+"About_Ack_TypeDuck" = "Thanks to tatoeba for the English sentence quotation";
+"About_Ack_WordFreq" = "Thanks to wordfrequency for high-frequency data:";
+"About_Link_Privacy" = "Privacy Policy";
+"About_Link_Contact" = "Contact Developer";
+"About_Link_Rate" = "Rate App";
+
+"mac_os_app" = "Chinese-English input method MacOs, click to connect and download";
+
+/* KeyboardColorSettingsView */
+"Color_Custom_Title" = "Custom Theme";
+"Color_Key_Bg" = "Key Background";
+"Color_Key_Highlight" = "Key Highlight";
+"Color_Key_Text" = "Key Text";
+"Color_Special_Bg" = "Special Key Bg";
+"Color_Special_Text" = "Special Key Text";
+"Color_Candidate_Bg" = "Candidate Bar Bg";
+"Color_Candidate_Text" = "Candidate Text";
+"Color_Keyboard_Bg" = "Keyboard Bg";
+"Color_Presets" = "Presets";
+"Color_Save_Current" = "Save Current";
+"Color_Alert_Save_Title" = "Save Preset";
+"Color_Alert_Save_Placeholder" = "Preset Name";
+"Color_Alert_Save_Message" = "Please enter a name for this theme";
+"Color_Alert_Delete_Title" = "Delete preset \"%@\"?";
+
+/* Notification & Reminder */
+"Notify_Default_Title" = "Word Review";
+"Notify_Default_Body" = "Check your words for today!";
+"Notify_Stat_Format" = "%d words used today";
+"Notify_Review_Format" = ", %d words to review";
+"Notify_Review_None" = ". Reviewing is rewarding";
+"Reminder_Title" = "Notifications";
+"Reminder_Section_Custom" = "Custom";
+"Reminder_Label_Title" = "Title";
+"Reminder_Section_Settings" = "Schedule";
+"Reminder_Label_Time" = "Reminder Time";
+"Reminder_Label_Enable" = "Enable Notifications";
+
+/* Search */
+"Search_Placeholder" = "Search words or Chinese...";
+"Search_No_Results" = "No local results";
+"Search_Web" = "Search on Web";
+"Search_History" = "History";
+"Search_Web_Confirm" = "Search this on the internet?";
+
+/* Wordbook & History */
+"Wordbook_Title" = "Wordbook";
+"History_Title" = "History";
+"History_All" = "All History";
+"History_Today" = "Today";
+"History_None" = "No records yet";
+"History_None_All" = "No history yet";
+"History_Chinese_Usage" = "Chinese Words";
+"History_English_Usage" = "English Words";
+"History_Date_Section" = "Dates";
+"History_Auto_Log" = "Auto-generated log";
+
+/* Word Detail & Edit */
+"Word_Detail_Title" = "Details";
+"Word_Example" = "Example";
+"Word_Note_Placeholder" = "Add notes...";
+"Word_Usage_Count" = "Count: %d";
+"Word_Last_Used" = "Last used: %@";
+"Word_Remind_Date" = "Reminder: %@";
+"Word_Auto_Play" = "Auto Play";
+"Word_Voice_Select" = "Voice";
+"Word_Voice_Default" = "System Default";
+"Word_Voice_Speed" = "Speed";
+"Word_Speed_Slow" = "Slow";
+"Word_Speed_Normal" = "Med";
+"Word_Speed_Fast" = "Fast";
+"Word_Familiarity" = "Familiarity";
+"Word_Review_Remind" = "Review Reminder";
+
+/* Display Settings */
+"Display_Settings" = "Display";
+"List_Settings" = "List Options";
+"Dual_Output_Mode" = "Dual Output Mode";
+"Shortcut_Settings_Title" = "Shortcut Settings";
+"Translation_Shortcut" = "Translation Key";
+"Tab_Toggle_Shortcut" = "Layer Toggle Key";
+"Press_Key" = "Press key...";
+"Word_Segmentation" = "Segmentation";
+"Select_Candidate" = "Select Word";
+"Select_First_Space" = "Select First (Space)";
+"Input_Pinyin_Letters" = "Input Letters (Enter)";
+"Page_Down_Up" = "Page Up/Down";
+"Expand_Collapse_Bar" = "Expand/Collapse Bar";
+"Select_Shift" = "Symbol switching";
+"App_Language_Label" = "Select Language";
+"Chinese_Simplified" = "Simplified Chinese";
+"Chinese_Traditional" = "Traditional Chinese";
+"Show_Word" = "Show Word";
+"Show_Pos" = "Show POS";
+"Show_Meaning" = "Show Meaning";
+"Show_Example" = "Show Example";
+"Show_Example_CN" = "Show Ex. Chinese";
+"Show_Note" = "Show Note";
+"Show_Count" = "Show Count";
+"Show_Last_Used" = "Show Last Used";
+"Show_Remind_Date" = "Show Remind Date";
+
+/* New Word */
+"New_Word_English" = "English Word";
+"New_Word_English_Placeholder" = "Enter English word (required)";
+"New_Word_Empty_Error" = "Word cannot be empty";
+"New_Word_Save_Error" = "Failed to save. Please try again.";
+"New_Word_Pos" = "POS";
+"New_Word_Pos_Placeholder" = "Enter part of speech";
+"New_Word_Meaning" = "Meaning";
+"New_Word_Meaning_Placeholder" = "Enter word meaning";
+"New_Word_Example" = "Example";
+"New_Word_Example_Placeholder" = "Enter English example";
+"New_Word_Example_CN" = "Example CN";
+"New_Word_Example_CN_Placeholder" = "Enter Chinese translation";
+"New_Word_Freq_EN" = "EN Frequency";
+"New_Word_Freq_Placeholder" = "Enter number";
+"New_Word_Chinese" = "Chinese Word";
+"New_Word_Chinese_Placeholder" = "Enter Chinese word";
+"New_Word_Pinyin" = "Pinyin";
+"New_Word_Pinyin_Placeholder" = "Lower case letters with space; e.g., ni hao";
+"New_Word_Pinyin_Abbr" = "Pinyin Abbr";
+"New_Word_Pinyin_Abbr_Placeholder" = "First letter of each word; e.g., nh";
+"New_Word_Stroke" = "Strokes";
+"New_Word_Stroke_Placeholder" = "Lower case hspnz with | separator; e.g., szhs|nhpn";
+"New_Word_Freq_CN" = "CN Frequency";
+
+/* GuideData */
+"Guide_Title_SmartPath" = "Smart Path";
+"Guide_Content_SmartPath" = "Intention: \"中文\". You can type in 4 ways:\n\n• Exact Pinyin: zhong wen\n• Initials (Jianpin): zh w\n• Mixed: zh wen or zhong w\n\nAll yield \"中文\". Smart path applies to all words.";
+"Guide_Title_FuzzyPinyin" = "Fuzzy Pinyin";
+"Guide_Content_FuzzyPinyin" = "Enables \"zh-z\" conversion. For example, typing \"zong wen\" yields both \"zong wen\" and \"zhong wen\".\n\nWhen combining \"zh-z\" and \"an-ang\", typing \"zong zhang\" yields 4 paths (zong zhan, zong zhang, zhong zhan, zhong zhang)";
+"Guide_Title_Correction" = "Correction";
+"Guide_Content_Correction" = "Auto-corrects pinyin positions (e.g., \"hzi\" to \"zhi\") and completes vowels (e.g., \"yon\" to \"yong\"). Key correction finds valid pinyin near your touch (e.g., \"yoi\" to \"you\").";
+"Guide_Title_DualCandidate" = "Dual Mode";
+"Guide_Content_DualCandidate" = "Cn/En mode shows Chinese and English. English Search reverse-looks up Chinese from English input. Expand candidate bar to sort by frequency, pinyin, or strokes.";
+"Guide_Title_WordManagement" = "Word Management";
+"Guide_Content_WordManagement" = "Automatically learns your vocabulary. For example, if \"Trancy Keyboard\" isn't in the dictionary, selecting \"Trancy\" and \"Keyboard\" in sequence will record it for future use.\n\nAlgorithms automatically combine unknown phrases based on frequency, learning your typing habits for smarter candidates.\n\nYou can edit, correct, add, or delete these words in the main app.";
+"Guide_Content_WordManagement" = "Automatically learns your vocabulary. For example, if \"Trancy Keyboard\" isn't in the dictionary, selecting \"Trancy\" and \"Keyboard\" in sequence will record it for future use.\n\nAlgorithms automatically combine unknown phrases based on frequency, learning your typing habits for smarter candidates.\n\nYou can edit, correct, add, or delete these words in the main app. \n\niCloud synchronization\nSupports the two-way synchronization function of mac and ios. The word selection you enter on the mac will appear on the ios end after the synchronization is turned on, generating the entries of learning records; the words newly created on the ios end will also appear on the mac end.";
+"Guide_Title_Tips" = "Tips";
+"Guide_Content_Tips" = "Long-press Delete to clear input. Use Split button to manually segment pinyin (e.g., \"ke n\" for \"可能\"). Slide down candidates to expand and filter.";
+"Guide_Title_Custom" = "Personalization";
+"Guide_Content_Custom" = "Customize colors, keyboard height, sounds, haptics, and font sizes to your liking.";
+
+"Guide_Title_eng" = "English & Fuzzy Match";
+"Guide_Content_eng" = "Search English words alongside Pinyin. Typing \"she\" queries both English words and Pinyin candidates.\n\nFuzzy English Match predicts intent based on approximate pronunciation or key proximity. Even with typos, it finds the right word. Example: \"frind\" matches \"friend\".\n\nVector-based intent guessing: typing \"woke\" suggests \"wake\", \"work\", \"week\".";
+
+"Guide_Title_emoji" = "Emoji & Symbol Search";
+"Guide_Content_emoji" = "Search for emojis and symbols by typing related Chinese keywords. They appear directly in the candidate bar for selection.";
+
+"Guide_Title_slideinput" = "Glide Typing";
+"Guide_Content_slideinput" = "Glide across the keyboard to input words effortlessly. For example, sliding over \"yuio\" identifies \"you\".\n\nNoise tolerance allows for up to 2 error characters and ignores vowel order (e.g., \"kuia\", \"kaui\", \"kiua\" all correct to \"kuai\").\n\nPinyin ending in \"n\" or \"g\" has higher tolerance, ignoring most accidental touches during the glide.";

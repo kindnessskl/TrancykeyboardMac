@@ -2,7 +2,6 @@ import Foundation
 
 class PinyinValidator {
     static let shared = PinyinValidator()
-
     private var validSyllables: Set<String> = []
     private var isLoaded = false
 

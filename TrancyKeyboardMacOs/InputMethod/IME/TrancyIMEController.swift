@@ -5,7 +5,6 @@ import Combine
 @objc(TrancyIMEController)
 @MainActor
 final class TrancyIMEController: IMKInputController, @unchecked Sendable {
-
     private var candidatePanel: NSPanel?
     private var hostingController: NSHostingController<AnyView>?
     private var translationPanel: NSPanel?
@@ -119,7 +118,6 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
     override func handle(_ event: NSEvent!, client sender: Any!) -> Bool {
         guard let event = event else { return false }
 
-        // Update current client reference
         if let inputClient = sender as? (any IMKTextInput) {
             self.currentClient = inputClient
         } else if let client = self.client() {
@@ -131,34 +129,43 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
         let isOptionPressed = flags.contains(.option)
         let isControlPressed = flags.contains(.control)
         let isCapsLockHardwareOn = flags.contains(.capsLock)
+        let currentModifiers = flags.intersection(KeyShortcut.mask).rawValue
+        let translationShortcut = settingsStore.translationShortcut
+        let isTranslationKey = event.keyCode == translationShortcut.keyCode && 
+                             currentModifiers == translationShortcut.modifiers
         
-        // Determine current effective English mode and case
-        let isEnglishMode = isShiftToggledEnglish || isCapsLockHardwareOn
-        let shouldForceLowercase = isShiftToggledEnglish // Shift-toggle overrides Caps Lock case
+        let tabShortcut = settingsStore.tabToggleShortcut
+        let isTabToggleKey = event.keyCode == tabShortcut.keyCode && 
+                           currentModifiers == tabShortcut.modifiers
 
-        // HIGH PRIORITY: Pass through if command or control is pressed to allow shortcuts (e.g., Cmd+A, Ctrl+E)
+        if event.type == .keyDown {
+            if isTranslationKey { 
+                _ = translateSelectedText()
+                return true  
+            }
+            if isTabToggleKey { 
+                _ = toggleActiveLayer()
+                return true  
+            }
+        }
+   
         if isCommandPressed || isControlPressed { return false }
-        
-        // Pass through if option is pressed, except for the backtick translation shortcut
-        if isOptionPressed && event.keyCode != KeyCode.Symbol.VK_BACKQUOTE { return false }
-
-        // Handle modifier flag changes (Shift, Caps Lock)
+        if isOptionPressed && !isTranslationKey { return false }
+       
+        let isEnglishMode = isShiftToggledEnglish || isCapsLockHardwareOn
+        let shouldForceLowercase = isShiftToggledEnglish
         if event.type == .flagsChanged {
             let isShiftNowDown = flags.contains(.shift)
-            
-            // Check for Shift Tap (Press and Release without other keys)
             if isShiftNowDown && !isShiftDown {
                 isShiftDown = true
                 wasOtherKeyPressedDuringShift = false
             } else if !isShiftNowDown && isShiftDown {
                 isShiftDown = false
                 if !wasOtherKeyPressedDuringShift {
-                    // Logic: Chinese -> English Lower -> Chinese
-                    // Logic: English Upper -> English Lower -> Chinese
                     if isShiftToggledEnglish {
-                        isShiftToggledEnglish = false // To Chinese
+                        isShiftToggledEnglish = false  
                     } else {
-                        isShiftToggledEnglish = true // To English Lower
+                        isShiftToggledEnglish = true  
                     }
                     
                     if !keyViewModel.currentInput.isEmpty || keyViewModel.isInSelectionTranslationMode {
@@ -166,10 +173,6 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
                     }
                 }
             }
-            
-            // Note: Caps Lock hardware state is automatically reflected in modifierFlags.
-            // We just need to ensure that if it's turned OFF, we also reset isShiftToggledEnglish if needed,
-            // or let the 3-state logic handle it.
             return false 
         }
 
@@ -178,16 +181,10 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
             
             let isShiftPressed = flags.contains(.shift)
             let rep = event.keyCode.representative
-
-            // If in English mode, handle character output
             if isEnglishMode {
-                // If there's active composition, commit it first
                 if !keyViewModel.currentInput.isEmpty {
                     commitComposition(sender)
                 }
-
-                // If we need to force a case (e.g., lowercase when Caps Lock is ON), we must use commitText.
-                // Otherwise, returning false lets the system handle it naturally (best for compatibility).
                 if shouldForceLowercase && isCapsLockHardwareOn {
                     switch rep {
                     case .alphabet(let letter):
@@ -200,9 +197,6 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
                     default: break
                     }
                 }
-                
-                // For all other English cases, let the system handle the key naturally.
-                // This ensures maximum compatibility with system fields and secure input fields.
                 return false
             }
 
@@ -211,10 +205,6 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
                 handleAlphabet(letter)
                 return true
             case .separator:
-                if isOptionPressed && keyViewModel.currentInput.isEmpty {
-                    return translateSelectedText()
-                }
-                
                 let isBackquote = event.keyCode == KeyCode.Symbol.VK_BACKQUOTE
                 let pKey: PunctuationKey = isBackquote ? .backquote : .quote
 
@@ -235,11 +225,10 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
                     if key == .minus { return pageUp() }
                     if key == .equal { return pageDown() }
                     if key == .bracketLeft {
-                        if keyViewModel.isExpanded { return pageUp() }
                         return toggleExpansion(force: false)
                     }
+                    if keyViewModel.isExpanded { return pageDown() }
                     if key == .bracketRight {
-                        if keyViewModel.isExpanded { return pageDown() }
                         return toggleExpansion(force: true)
                     }
                 }
@@ -251,7 +240,7 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
             case .return:
                 return handleReturn()
             case .tab:
-                return toggleActiveLayer()
+                return false  
             case .arrow(let dir):
                 return moveHighlight(direction: dir)
             case .escape:
@@ -381,7 +370,6 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
         let windowHeight: CGFloat = (type == .candidate) ? 
             ((currentInputMode == .chinesePreview && !keyViewModel.isExpanded) ? 70 : (keyViewModel.isExpanded ? 400 : 36)) : 180
         
-        // Default position: below the cursor
         return NSPoint(x: rect.origin.x, y: rect.origin.y - windowHeight - 5)
     }
 
@@ -392,16 +380,13 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
         if let screen = NSScreen.main {
             let f = screen.visibleFrame
             
-            // Horizontal clamping
             if x + width > f.maxX { x = f.maxX - width }
             if x < f.minX { x = f.minX }
             
-            // Vertical clamping: if bottom is off-screen, try showing above the cursor
             if y < f.minY {
                 y = anchorRect.origin.y + anchorRect.size.height + 5
             }
             
-            // Final safety clamping
             if y + height > f.maxY { y = f.maxY - height }
             if y < f.minY { y = f.minY }
         }

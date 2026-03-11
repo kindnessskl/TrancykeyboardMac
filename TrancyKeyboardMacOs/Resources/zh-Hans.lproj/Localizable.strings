@@ -1,0 +1,373 @@
+
+/* Settings View Buttons */
+"English_Lookup" = "查英语";
+"Double_Pinyin" = "小鹤双拼";
+"Sliding_Input" = "滑动输入";
+"Pinyin_Correction" = "拼音纠错";
+"Key_Correction" = "按键纠错";
+"Fuzzy_Pinyin" = "模糊拼音";
+"English_Correction" = "英语纠错";
+"Emoji_Search" = "查表情";
+"Symbol_Search" = "查符号";
+"Auto_Suggestion" = "自动联想";
+"Auto_Composition" = "自动组词";
+"Selection_History" = "记录选词";
+"Frequency_Adjustment" = "选词加频";
+"Candidate_Mode" = "显示层数";
+"Key_Sound" = "按键声音";
+"Key_Vibration" = "按键震动";
+"Keyboard_Height" = "键盘高度";
+"Keyboard_Color" = "键盘颜色";
+"Candidate_Spacing" = "候选间距";
+"Candidate_Font_Size" = "候选字体";
+"Interface_Language" = "界面語言 Language";
+"Output_Mode" = "简繁切换";
+"English_Prefix_Lookup" = "英语前缀";
+"Chinese_Lookup" = "查中文";
+"Simplified" = "简体";
+"Traditional" = "繁体";
+
+
+/* Settings Button States */
+"Enabled" = "开启";
+"Disabled" = "关闭";
+"Custom" = "自定义";
+
+/* Input Modes */
+"Mode_Chinese" = "单层";
+"Mode_Translation" = "翻译";
+"Mode_ChinesePreview" = "Cn/En";
+"Desc_Chinese" = "简洁模式";
+"Desc_Translation" = "中英互译";
+"Desc_ChinesePreview" = "中英双字";
+
+/* Layout Types */
+"Layout_Standard" = "26键";
+"Layout_NineGrid" = "09键";
+"Desc_Standard" = "拼音键盘";
+"Desc_NineGrid" = "拼音键盘";
+"Desc_NineGridStroke" = "笔画键盘";
+
+/* Dual Candidate Output Mode */
+"Dual_Mode_Default" = "双层可选";
+"Dual_Mode_ChineseOnly" = "仅第一层";
+"Dual_Mode_EnglishOnly" = "仅第二层";
+
+/* Font Sizes */
+"Font_Small" = "小";
+"Font_Medium" = "中";
+"Font_Large" = "大";
+
+/* Spacing */
+"Spacing_Tight" = "紧凑";
+"Spacing_Normal" = "适中";
+"Spacing_Wide" = "宽阔";
+
+/* Fuzzy Pinyin Settings */
+"Fuzzy_Pinyin_Title" = "模糊拼音设置";
+"Category_Initial" = "声母";
+"Category_Final" = "韵母";
+"Category_Syllable" = "音节";
+"Category_Other" = "其他";
+
+/* Fuzzy Pinyin Descriptions */
+"Fuzzy_zh_z_desc" = "知-资";
+"Fuzzy_ch_c_desc" = "吃-此";
+"Fuzzy_sh_s_desc" = "是-思";
+"Fuzzy_l_n_desc" = "来-奶";
+"Fuzzy_f_h_desc" = "飞-黑";
+"Fuzzy_l_r_desc" = "来-人";
+"Fuzzy_g_k_desc" = "哥-科";
+"Fuzzy_ang_an_desc" = "张-站";
+"Fuzzy_eng_en_desc" = "生-森";
+"Fuzzy_in_ing_desc" = "因-英";
+"Fuzzy_ian_iang_desc" = "年-娘";
+"Fuzzy_uan_uang_desc" = "关-光";
+"Fuzzy_ai_an_desc" = "买-慢";
+"Fuzzy_ong_un_desc" = "中-春";
+"Fuzzy_ong_eng_desc" = "中-生";
+"Fuzzy_iong_un_desc" = "雄-春";
+"Fuzzy_fei_hui_desc" = "飞-会";
+"Fuzzy_hu_fu_desc" = "湖-福";
+"Fuzzy_wang_huang_desc" = "王-黄";
+"Fuzzy_v_u_desc" = "ü和u互转";
+
+/* Skin Settings */
+"Skin_Title" = "选择皮肤主题";
+"Skin_Default" = "默认主题";
+"Skin_Dark" = "深色主题";
+"Skin_Custom" = "自定义";
+
+/* General */
+"Close" = "关闭";
+"AppName" = "中英输入法";
+"Loading" = "加载中...";
+"Tip" = "提示";
+"Confirm" = "确定";
+
+/* App Sections */
+"Input_Assist" = "输入辅助";
+"Appearance_Theme" = "外观主题";
+"Feedback_Settings" = "反馈设置";
+"Keyboard_Settings_Title" = "键盘设置";
+"Vocab_Management" = "词汇管理";
+"Permission_Desc" = "权限说明";
+"Cloud_Sync" = "iCloud同步";
+"Last_Sync" = "最后同步";
+"Sort_Recent" = "最后使用";
+
+"Setting_Path" = "设置路径：";
+"Setting_Step" = "设置 → 通用 → 键盘 → 中英输入法 → 开启‘允许完全访问’";
+"Open_System_Settings" = "点击打开系统设置";
+
+/* Detailed Labels */
+"English_Fuzzy_Lookup" = "模糊英语查词";
+"English_Lookup_Detail" = "查英语单词";
+"Sliding_Pinyin_Correction" = "滑动拼音纠正";
+"Candidate_Mode_Detail" = "中英文候选词选择";
+"Database_Error_Hint" = "请先打开主 App 完成初始化配置";
+
+/* Keyboard Keys */
+"Key_123" = "123";
+"Key_Back" = "返回";
+"Key_Space" = "空格";
+"Key_Select" = "选定";
+"Key_Pinyin" = "拼音";
+"Key_Split" = "分词";
+"Key_Stroke_One" = "一";
+"Key_Newline" = "换行";
+"Key_Retry" = "重输";
+"Key_Stroke" = "笔画";
+"Key_Wildcard" = "通配";
+"Key_Separator" = "分隔";
+
+/* Actions */
+"Action_exit" = "退出";
+"Action_Translate" = "翻译";
+"Action_Commit" = "上屏";
+"Action_Cancel" = "取消";
+"Action_Apply" = "应用";
+"Action_Lock" = "锁定";
+"Action_Unlock" = "解锁";
+"Action_Return" = "返回";
+"Action_Save" = "保存";
+"Action_Delete" = "删除";
+"Action_GoSettings" = "去设置";
+"Action_Clear" = "清除";
+"Action_Search" = "查询";
+"Action_New_Group" = "新建词组";
+"Action_Correction" = "校正单词";
+"Action_Upload_Photo" = "上传照片";
+"Action_Delete_Photo" = "删除照片";
+"Action_Feedback" = "问题反馈";
+"Action_Finish" = "完成";
+"Action_Delete_Word" = "删除英文单词";
+"Action_Delete_Chinese" = "删除中文字词";
+"Action_Edit_Word" = "编辑单词";
+
+/* Sorting and Units */
+"Sort_Type" = "排序方式";
+"Sort_Frequency" = "词频";
+"Sort_Pinyin" = "拼音";
+"Sort_Stroke" = "笔画";
+"Sort_Familiarity" = "熟悉度";
+"Sort_Favorite" = "收藏";
+"Sort_AZ" = "A-Z";
+"Sort_Date" = "日期";
+"Sort_Count" = "次数";
+"Sort_Asc" = "升序";
+"Sort_Desc" = "降序";
+"Stroke_Unit" = "画";
+"Word_Unit" = " 词";
+"Day_Unit" = "天后";
+"Star_Unit" = " 星";
+"Syncing" = "正在同步";
+
+
+/* Alerts */
+"Alert_Delete_Word_Title" = "确认删除英文单词";
+"Alert_Delete_Chinese_Title" = "确认删除中文？";
+"Alert_Delete_Message" = "删除后将无法恢复，确定要删除吗？";
+
+/* Categories */
+"Category_Top5000" = "高频单词";
+"Category_Top15000" = "常用单词";
+"Category_Verbs" = "常用动词";
+"Category_Phrases" = "动词短语";
+"Category_Slang" = "常用俚语";
+"Category_Common45000" = "常用词组";
+"Category_API" = "苹果翻译";
+"Category_chunk" = "语意块词";
+"Category_sentence" = "常用短句";
+"Category_UserAdded" = "自定义词组";
+"Group_Range_Format" = "第%d-%d词";
+
+/* ContentView */
+"Tab_History" = "历史";
+"Tab_Wordbook" = "单词本";
+"Tab_Search" = "搜索";
+"Tab_Settings" = "设置";
+"Permission_Alert_Title" = "需要键盘完全磁盘访问权限";
+"Permission_Alert_Message" = "需要键盘完全磁盘访问权限来记录您在输入过程中选中的词汇，生成选词历史，为您提供个性化的中英文单词复习内容。\n\n请在 设置 → 通用 → 键盘 → %@ → 开启允许完全访问";
+
+/* AboutView */
+"About_Title" = "关于";
+"About_Section_AppDescription" = "应用说明";
+"About_Description_1" = "这款 App把单词本以及中文输入法两个软件糅合在一起，通过记录输入过程中选中的词汇，生成个性化的复习内容，直观的理解每个英语单词的含义，不再只背一些复杂的永远不会用的单词";
+"About_Description_3" = "输入法有28万+的中文词条，配合高频英语2万+词汇，8万+中英文翻译词典，内置苹果翻译引擎，解决几乎所有中文使用场景所需的字词，以及提供准确的英语句子翻译。";
+"About_Section_MoreApps" = "更多应用";
+"About_Section_Acknowledgements" = "致谢";
+"About_Ack_Rime" = "感谢Rime-ice开源项目，中文词汇引用：";
+"About_Ack_TypeDuck" = "感谢TypeDuck开源项目，部分英语词汇引用：";
+"About_Ack_tatoeba" = "感谢tatoeba，英語語句引用：";
+"About_Ack_WordFreq" = "感谢wordfrequency,部分高频词汇引用：";
+"About_Link_Privacy" = "隐私政策";
+"About_Link_Contact" = "联系开发者";
+"About_Link_Rate" = "应用评分";
+
+"mac_os_app" = "中英输入法MacOs端，点击链接下载";
+
+/* KeyboardColorSettingsView */
+"Color_Custom_Title" = "自定义主题";
+"Color_Key_Bg" = "按键背景";
+"Color_Key_Highlight" = "按键高亮";
+"Color_Key_Text" = "按键文字";
+"Color_Special_Bg" = "功能键背景";
+"Color_Special_Text" = "功能键文字";
+"Color_Candidate_Bg" = "候选栏背景";
+"Color_Candidate_Text" = "候选栏文字";
+"Color_Keyboard_Bg" = "键盘背景";
+"Color_Presets" = "皮肤预设";
+"Color_Save_Current" = "保存当前";
+"Color_Alert_Save_Title" = "保存预设";
+"Color_Alert_Save_Placeholder" = "输入预设名称";
+"Color_Alert_Save_Message" = "请为当前主题设置一个名称";
+"Color_Alert_Delete_Title" = "确定删除预设 \"%@\" 吗？";
+
+/* Notification & Reminder */
+"Notify_Default_Title" = "单词复习";
+"Notify_Default_Body" = "查看今天用词记录！";
+"Notify_Stat_Format" = "今天已使用 %d 词";
+"Notify_Review_Format" = "，%d 词待复习";
+"Notify_Review_None" = "温故而知新";
+"Reminder_Title" = "开启通知";
+"Reminder_Section_Custom" = "自定义";
+"Reminder_Label_Title" = "通知标题";
+"Reminder_Section_Settings" = "提醒设置";
+"Reminder_Label_Time" = "提醒时间";
+"Reminder_Label_Enable" = "开启通知";
+
+/* Search */
+"Search_Placeholder" = "搜索单词或中文...";
+"Search_No_Results" = "本地词典无结果";
+"Search_Web" = "从互联网搜索";
+"Search_History" = "搜索历史";
+"Search_Web_Confirm" = "是否打开浏览器从互联网搜索查词？";
+
+/* Wordbook & History */
+"Wordbook_Title" = "单词本";
+"History_Title" = "选词历史";
+"History_All" = "全部历史";
+"History_Today" = "今天";
+"History_None" = "暂无选词记录";
+"History_None_All" = "暂无历史选词记录";
+"History_Chinese_Usage" = "中文用词";
+"History_English_Usage" = "英文用词";
+"History_Date_Section" = "选词日期";
+"History_Auto_Log" = "选词自动生成日志";
+
+/* Word Detail & Edit */
+"Word_Detail_Title" = "详情设置";
+"Word_Example" = "例句";
+"Word_Note_Placeholder" = "添加笔记...";
+"Word_Usage_Count" = "使用次数: %d";
+"Word_Last_Used" = "上次使用: %@";
+"Word_Remind_Date" = "提醒日期: %@";
+"Word_Auto_Play" = "自动播放";
+"Word_Voice_Select" = "语音选择";
+"Word_Voice_Default" = "系统默认";
+"Word_Voice_Speed" = "语音速度";
+"Word_Speed_Slow" = "慢";
+"Word_Speed_Normal" = "中";
+"Word_Speed_Fast" = "快";
+"Word_Familiarity" = "熟悉度";
+"Word_Review_Remind" = "复习提醒";
+
+/* Display Settings */
+"Display_Settings" = "显示设置";
+"List_Settings" = "列表设置";
+"Dual_Output_Mode" = "双层输出模式";
+"Shortcut_Settings_Title" = "快捷键设置";
+"Translation_Shortcut" = "翻译快捷键";
+"Tab_Toggle_Shortcut" = "选词层切换";
+"Press_Key" = "请按键...";
+"Word_Segmentation" = "分词按钮";
+"Select_Candidate" = "选词";
+"Select_First_Space" = "空格选词";
+"Input_Pinyin_Letters" = "回车原始输入";
+"Page_Down_Up" = "翻页";
+"Expand_Collapse_Bar" = "折叠／展开";
+"Select_Shift" = "小写／符号切换";
+
+"App_Language_Label" = "选择语言";
+"Chinese_Simplified" = "简体中文";
+"Chinese_Traditional" = "繁体中文";
+"Show_Word" = "显示单词";
+"Show_Pos" = "显示词性";
+"Show_Meaning" = "显示释义";
+"Show_Example" = "显示例句";
+"Show_Example_CN" = "显示例句中文";
+"Show_Note" = "显示笔记";
+"Show_Count" = "显示使用次数";
+"Show_Last_Used" = "显示上次使用";
+"Show_Remind_Date" = "显示提醒日期";
+
+/* New Word */
+"New_Word_English" = "英文单词";
+"New_Word_English_Placeholder" = "输入英文单词,不能为空";
+"New_Word_Empty_Error" = "英文单词不能为空";
+"New_Word_Save_Error" = "保存失败，请检查数据格式或重试";
+"New_Word_Pos" = "词性";
+"New_Word_Pos_Placeholder" = "输入词性";
+"New_Word_Meaning" = "释义";
+"New_Word_Meaning_Placeholder" = "输入单词释义";
+"New_Word_Example" = "例句";
+"New_Word_Example_Placeholder" = "输入英文例句";
+"New_Word_Example_CN" = "例句中文";
+"New_Word_Example_CN_Placeholder" = "输入中文例句";
+"New_Word_Freq_EN" = "英文频率";
+"New_Word_Freq_Placeholder" = "请输入数字";
+"New_Word_Chinese" = "中文词汇";
+"New_Word_Chinese_Placeholder" = "请输入中文词汇";
+"New_Word_Pinyin" = "拼音";
+"New_Word_Pinyin_Placeholder" = "输入小写字母，字之间用空格符号隔开；例子：ni hao";
+"New_Word_Pinyin_Abbr" = "拼音简写";
+"New_Word_Pinyin_Abbr_Placeholder" = "输入小写字母，每个字的首字母；例子：nh";
+"New_Word_Stroke" = "笔画编码";
+"New_Word_Stroke_Placeholder" = "请将横竖撇捺折对应编码小写字母hspnz\n字符之间用｜符号隔开；例子：中文=szhs|nhpn";
+"New_Word_Freq_CN" = "中文频率";
+
+/* GuideData */
+"Guide_Title_SmartPath" = "智能路径";
+"Guide_Content_SmartPath" = "以输入：“中文” 作为意图，可通过以下4种方式键入字母：\n\n• 准确拼音 ： zhong wen\n• 拼音声母（简拼）：zh w\n• 简拼+准拼：zh wen\n• 准拼+简拼：zhong w\n\n均可得到“中文”候选词。其他字词遵循同样的规则，智能路径获取文字。";
+"Guide_Title_FuzzyPinyin" = "模糊拼音";
+"Guide_Content_FuzzyPinyin" = "开启声母“zh-z”，互相转换的模糊拼音方案，以输入：“中文” 作为查询例子，当你输入zong wen,得到以下两条路径：\n\n• 准确拼音\n    - zong wen\n    - zhong wen\n\n反之亦然。\n\n同时开启声母“zh-z”，韵母\"an-ang”互相转换的模糊拼音方案，以输入：“总帐” 作为查询例子，当你输入zong zhang,那么你就得到以下4条路径：\n\n• 准确拼音\n    - zong zhan\n    - zong zhang\n    - zhong zhan\n    - zhong zhang\n\n开启模糊拼音过多，会出现副作用，进行键入时会产生大量查询，候选词以各路径中最高频作为排序，不一定最符合原始输入意图。";
+"Guide_Title_Correction" = "拼音纠正，按键纠正";
+"Guide_Content_Correction" = "开启拼音纠正，自动纠正声母，韵母位置，以输入：“hzi ” 作为例子，自动纠正为\"zhi”。\n\n在特定的声母下，补全韵母，以输入：“yon ” 作为例子，自动补全为\"yong”。\n\n开启按键纠正，自动寻找按键相邻的有效拼音。以输入：“yoi ” 作为例子，自动纠正为you”。";
+"Guide_Title_DualCandidate" = "双层候选";
+"Guide_Content_DualCandidate" = "切换到cn/en模式，同时显示中英文对应的词组。\n\n开启查英语功能，根据键入的字母，自动反查对应的中文词组。\n\n候选栏支持下滑展开，可按词频、拼音或笔画灵活排序，搭配侧边栏导航快速定位。\n\n自定义选词上屏逻辑，双层可选，仅中文，仅英文。";
+"Guide_Title_WordManagement" = "词汇管理";
+"Guide_Content_WordManagement" = "开启记录选词功能，自动学习输入词汇，以输入：“中英输入法”\n作为例子，在词库中并不存在“中英输入法”词条。当你在一次输入序列里面，分别选中：中英，输入法；那么就会自动组合，记录“中英输入法”到词库，下次输入即可找到此词汇。\n\n自动组词\n\n当遇到一些数据库自身不存在的词条，算法根据输入的频率，自动组合本次输入中数据库不存在的词条，与记录选词互相配合作用，学习用户输入的习惯，提供更加智能的候选词\n\n您可以在主APP中编辑他们，矫正单词，新增，删除等。\n\niCloud同步\n支持mac与ios双向同步功能，您在mac上输入的选词，开启同步之后，会在ios端出现，生成学习记录的条目；同样在ios 端新建的词汇会在mac端出现。";
+"Guide_Title_Tips" = "使用技巧";
+"Guide_Content_Tips" = "在标准键盘下，想要快速清空当前的字母序列，长按删除键，即可快速清空当前输入。\n\n分词按钮：手动切分拼音，形成智能路径（参考指引一）。以“可能”为例，当你键入ken，此时显示：肯，在键入n之前，按下分词键，路径就变成，“ke n”，此时显示：可能。\n\n在候选栏向下滑动，展开候选词窗口，支持词频，拼音，笔画数量进行排序，点击侧边栏快速定位。";
+"Guide_Title_Custom" = "个性化键盘";
+"Guide_Content_Custom" = "自定义编辑您喜欢的任何颜色到键盘显示。\n\n可选的键盘高度，声音，震动，字体大小等。";
+
+"Guide_Title_eng" = "查英语、模糊英语匹配";
+"Guide_Content_eng" = "开启查英语功能，与拼音同时进行输入，如输入“she”同时查询英语单词与pinyin中的候选词，提供英语反查的需求。\n\n开启模糊英语匹配，该功能提供与模糊拼音一样的思路，允许通过大概发音，大致的按键，预测输入意图，即使输入的字母不完全匹配单词，也能提供单词候选。例子：frind,忽略中间的e,也能通过模糊匹配获取单词：friend。\n向量猜测用户输入意图的单词：例如输入：woke,算法给出：wake work week匹配的单词。";
+
+"Guide_Title_emoji" = "查表情、查符号";
+"Guide_Content_emoji" = "通过匹配输入意图中的中文字，让表情和符号可以直接在候选层显示，选中上屏";
+
+"Guide_Title_slideinput" = "滑动输入";
+"Guide_Content_slideinput" = "滑动输入允许在手指滑过键盘的情况下，智能识别用户输入意图，例如：在键盘上滑动yuio,自动识别为：you；\n\n噪声容差是2个错误字符，将意图输入的拼音包含在滑动之内，可忽略韵母输入顺序：例如输入kuia,kaui，kiua，都能得到矫正过后的kuai。\n\n以韵母结尾n或g的拼音，噪声容差相对较大，忽略大部分滑动过程中的误触\n\n例子：在键盘上滑过chji fdsan，在规则上识别为chi fan的拼音，从而实现快速的滑动输入";

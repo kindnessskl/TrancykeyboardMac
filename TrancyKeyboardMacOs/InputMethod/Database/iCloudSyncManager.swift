@@ -5,13 +5,11 @@ import OSLog
 
 class iCloudSyncManager {
     static let shared = iCloudSyncManager()
-    
     private let logger = Logger(subsystem: "com.trancy.keyboard", category: "Sync")
     private let container = CKContainer(identifier: AppConstants.Database.icloudContainerIdentifier)
     private var privateDB: CKDatabase { container.privateCloudDatabase }
     private let database: DatabaseManager
     private let lastSyncKey = "com.trancy.sync.lastSyncTimestamp"
-    
     private let syncQueue = DispatchQueue(label: "com.trancy.sync.engine", qos: .utility)
     private var isSyncing = false
     private let syncThreshold: Int = 300
@@ -35,32 +33,24 @@ class iCloudSyncManager {
             completion?(false)
             return
         }
-
         guard !isSyncing else {
             logger.info(">>> Sync already in progress, skipping.")
             completion?(false)
             return
         }
-
         let lastSync = SharedUserDefaults.shared.integer(forKey: self.lastSyncKey)
         let now = Int(Date().timeIntervalSince1970)
-
         if !force && (now - lastSync) < syncThreshold {
             completion?(false)
             return
         }
-
         isSyncing = true
-        
         syncQueue.async {
             self.logger.info(">>> SYNC START. Anchor: \(lastSync)")
-            
             self.pushChanges(since: lastSync) { pushSuccess in
                 self.logger.info(">>> PUSH FINISHED (Success: \(pushSuccess)). Starting pull phase...")
-                
                 self.pullChanges(since: lastSync) { pullSuccess in
-                    self.isSyncing = false 
-                    
+                    self.isSyncing = false
                     if pullSuccess {
                         let nextSyncAnchor = Int(Date().timeIntervalSince1970)
                         SharedUserDefaults.shared.set(nextSyncAnchor, forKey: self.lastSyncKey)
@@ -69,7 +59,6 @@ class iCloudSyncManager {
                     } else {
                         self.logger.error(">>> PULL PHASE FAILED.")
                     }
-                    
                     DispatchQueue.main.async {
                         completion?(pullSuccess)
                     }
@@ -77,11 +66,9 @@ class iCloudSyncManager {
             }
         }
     }
-    
     private func pushChanges(since timestamp: Int, completion: @escaping (Bool) -> Void) {
         let tables = ["chinese_table", "english_table", "learning_table", "cn_en_mapping"]
         var uniqueRecords = [CKRecord.ID: CKRecord]()
-        
         for table in tables {
             let sql = "SELECT * FROM \(table) WHERE updated_at > ?"
             let rows = database.executeQuery(sql, parameters: [timestamp])
@@ -91,30 +78,25 @@ class iCloudSyncManager {
                 }
             }
         }
-        
         let allRecords = Array(uniqueRecords.values)
         guard !allRecords.isEmpty else {
             self.logger.info("No local data needs pushing.")
             completion(true)
             return
         }
-        
         self.logger.info("Pushing \(allRecords.count) records in batches...")
         let recordChunks = allRecords.chunked2(into: 100)
         self.uploadBatchesSerially(recordChunks, currentIndex: 0, completion: completion)
     }
-    
     private func uploadBatchesSerially(_ chunks: [[CKRecord]], currentIndex: Int, completion: @escaping (Bool) -> Void) {
         guard currentIndex < chunks.count else {
             completion(true)
             return
         }
-        
         let chunk = chunks[currentIndex]
         let op = CKModifyRecordsOperation(recordsToSave: chunk, recordIDsToDelete: nil)
         op.savePolicy = .changedKeys
         op.qualityOfService = .utility
-        
         op.modifyRecordsResultBlock = { result in
             switch result {
             case .success:
@@ -129,43 +111,35 @@ class iCloudSyncManager {
         }
         privateDB.add(op)
     }
-    
     private func pullChanges(since timestamp: Int, completion: @escaping (Bool) -> Void) {
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp)) as NSDate
         let predicate = NSPredicate(format: "modificationDate > %@", date)
-        
         let baseTables = ["chinese_table", "english_table"]
         let relationTables = ["learning_table", "cn_en_mapping"]
-        
         self.pullTablesSerially(groups: [baseTables, relationTables], predicate: predicate, completion: completion)
     }
-
     private func pullTablesSerially(groups: [[String]], predicate: NSPredicate, completion: @escaping (Bool) -> Void) {
         guard !groups.isEmpty else {
             completion(true)
             return
         }
-        
         var remainingGroups = groups
         let currentGroup = remainingGroups.removeFirst()
         let group = DispatchGroup()
         var hasError = false
-        
         for table in currentGroup {
             group.enter()
             let query = CKQuery(recordType: table, predicate: predicate)
             let op = CKQueryOperation(query: query)
             op.qualityOfService = .utility
-            
             op.recordMatchedBlock = { _, result in
                 if let record = try? result.get() {
                     self.mergeSingleRecord(record: record, table: table)
                 }
             }
-            
             op.queryResultBlock = { result in
                 if case .failure(let error) = result {
-                    if (error as NSError).code != 11 { 
+                    if (error as NSError).code != 11 {
                         self.logger.error("Fetch failed for \(table): \(error.localizedDescription)")
                         hasError = true
                     }
@@ -174,7 +148,6 @@ class iCloudSyncManager {
             }
             privateDB.add(op)
         }
-        
         group.notify(queue: syncQueue) {
             if hasError {
                 completion(false)
@@ -183,24 +156,19 @@ class iCloudSyncManager {
             }
         }
     }
-    
     private func mergeSingleRecord(record: CKRecord, table: String) {
         if let recordClientID = record["client_id"] as? String, recordClientID == deviceID {
             return
         }
-        
         let remoteUpdatedAt = record["updated_at"] as? Int ?? 0
         let localUpdatedAt = getLocalUpdatedAt(record: record, table: table)
-        
         if remoteUpdatedAt <= localUpdatedAt {
             return
         }
-
         _ = database.beginTransaction()
         applyRecordToLocal(record: record, table: table)
         _ = database.commitTransaction()
     }
-
     private func getLocalUpdatedAt(record: CKRecord, table: String) -> Int {
         if table == "chinese_table" {
             let word = record["word"] as? String ?? ""
@@ -224,10 +192,8 @@ class iCloudSyncManager {
             return database.executeQuery("SELECT updated_at FROM \(table) WHERE cn_id = ? AND en_id = ?", parameters: [cid, eid]).first?["updated_at"] as? Int ?? 0
         }
     }
-
     private func applyRecordToLocal(record: CKRecord, table: String) {
         let isDeleted = (record["is_deleted"] as? Int ?? 0) == 1
-        
         switch table {
         case "chinese_table":
             let word = record["word"] as? String ?? ""
@@ -254,7 +220,6 @@ class iCloudSyncManager {
             let word = record["word"] as? String ?? ""
             let type = record["type"] as? String ?? ""
             let typeNum = record["type_num"] as? Int ?? 0
-            
             if isDeleted {
                 self.logger.info("🗑 [Sync] Deleting English word: \(word) (Type: \(type))")
                 if type == "api" || type == "user_added" {
@@ -269,7 +234,6 @@ class iCloudSyncManager {
                 } else {
                     existingId = database.executeQuery("SELECT id FROM english_table WHERE word = ? AND type = ? AND type_num = ? LIMIT 1", parameters: [word, type, typeNum]).first?["id"] as? Int
                 }
-                
                 if let id = existingId {
                     self.logger.info("♻️ [Sync] Updating existing English word (ID: \(id)): \(word)")
                     let sql = """
@@ -295,7 +259,6 @@ class iCloudSyncManager {
             }
         case "learning_table", "cn_en_mapping":
             var (cid, eid) = resolveLocalIDs(from: record)
-            
             if cid == nil, let cnWord = record["sync_cn_word"] as? String, let cnPinyin = record["sync_cn_pinyin"] as? String {
                 self.logger.info("🛠 [Sync] Missing local Chinese word '\(cnWord)', creating skeleton...")
                 let now = Int(Date().timeIntervalSince1970)
@@ -303,15 +266,12 @@ class iCloudSyncManager {
                 _ = database.executeInsert(sql, parameters: [cnWord, cnWord, cnPinyin, now])
                 cid = database.executeQuery("SELECT id FROM chinese_table WHERE word = ? AND pinyin = ? LIMIT 1", parameters: [cnWord, cnPinyin]).first?["id"] as? Int
             }
-            
             if eid == nil, let enWord = record["sync_en_word"] as? String, let enType = record["sync_en_type"] as? String {
                 self.logger.info("🛠 [Sync] Missing local English word '\(enWord)', creating skeleton...")
                 let now = Int(Date().timeIntervalSince1970)
                 let enTypeNum = record["sync_en_type_num"] as? Int ?? 1
-                
                 let phonex = Phonex.encode(enWord)
                 let normalized = enWord.lowercased().replacingOccurrences(of: "'", with: "").replacingOccurrences(of: " ", with: "")
-                
                 let sql = """
                 INSERT INTO english_table (word, pos, meaning, ipa, example, example_cn, frequency, type, type_num, phonex, word_normalized, updated_at, is_deleted) 
                 VALUES (?, '', '', '', '', '', 1, ?, ?, ?, ?, ?, 0)
@@ -319,12 +279,10 @@ class iCloudSyncManager {
                 _ = database.executeInsert(sql, parameters: [enWord, enType, enTypeNum, phonex, normalized, now])
                 eid = database.executeQuery("SELECT id FROM english_table WHERE word = ? AND type = ? AND type_num = ? LIMIT 1", parameters: [enWord, enType, enTypeNum]).first?["id"] as? Int
             }
-
             guard let validCid = cid, let validEid = eid else {
                 self.logger.error("❌ [Sync] Critical: Failed to resolve or create local IDs for \(table).")
-                return 
+                return
             }
-            
             if isDeleted {
                 self.logger.info("🗑 [Sync] Deleting relation in \(table): CN_ID:\(validCid), EN_ID:\(validEid)")
                 _ = database.executeUpdate("DELETE FROM \(table) WHERE cn_id = ? AND en_id = ?", parameters: [validCid, validEid])
@@ -361,30 +319,24 @@ class iCloudSyncManager {
         default: break
         }
     }
-    
     private func resolveLocalIDs(from record: CKRecord) -> (cnId: Int?, enId: Int?) {
         guard let cnWord = record["sync_cn_word"] as? String,
               let cnPinyin = record["sync_cn_pinyin"] as? String,
               let enWord = record["sync_en_word"] as? String,
               let enType = record["sync_en_type"] as? String,
               let enTypeNum = record["sync_en_type_num"] as? Int else { return (nil, nil) }
-        
         let cnId = database.executeQuery("SELECT id FROM chinese_table WHERE word = ? AND pinyin = ? LIMIT 1", parameters: [cnWord, cnPinyin]).first?["id"] as? Int
-        
         var enId: Int?
         if enType == "api" || enType == "user_added" {
             enId = database.executeQuery("SELECT id FROM english_table WHERE word = ? AND type = ? LIMIT 1", parameters: [enWord, enType]).first?["id"] as? Int
         } else {
             enId = database.executeQuery("SELECT id FROM english_table WHERE word = ? AND type = ? AND type_num = ? LIMIT 1", parameters: [enWord, enType, enTypeNum]).first?["id"] as? Int
         }
-        
         return (cnId, enId)
     }
-    
     private func packageRecord(table: String, row: [String: Any]) -> CKRecord? {
         var businessKey = ""
         var extraFields = [String: CKRecordValue]()
-        
         switch table {
         case "chinese_table":
             guard let word = row["word"] as? String, let pinyin = row["pinyin"] as? String else { return nil }
@@ -402,10 +354,8 @@ class iCloudSyncManager {
             let cnRow = database.executeQuery("SELECT word, pinyin FROM chinese_table WHERE id = ?", parameters: [cnId]).first
             let enRow = database.executeQuery("SELECT word, type, type_num FROM english_table WHERE id = ?", parameters: [enId]).first
             guard let cr = cnRow, let er = enRow else { return nil }
-            
-            let cnWord = cr["word"] as? String ?? "", cnPinyin = cr["pinyin"] as? String ?? "", 
+            let cnWord = cr["word"] as? String ?? "", cnPinyin = cr["pinyin"] as? String ?? "",
                 enWord = er["word"] as? String ?? "", enType = er["type"] as? String ?? "", enTypeNum = er["type_num"] as? Int ?? 0
-            
             if enType == "api" || enType == "user_added" {
                 businessKey = "\(table)_\(cnWord)_\(cnPinyin)_\(enWord)_\(enType)"
             } else {
@@ -418,11 +368,9 @@ class iCloudSyncManager {
             extraFields["sync_en_type_num"] = enTypeNum as CKRecordValue
         default: return nil
         }
-        
         let recordID = CKRecord.ID(recordName: generateSecureHash(from: businessKey))
         let record = CKRecord(recordType: table, recordID: recordID)
         record["client_id"] = deviceID as CKRecordValue
-        
         for (key, value) in row {
             if ["id", "cn_id", "en_id", "client_id"].contains(key) || key.contains("path") { continue }
             if let val = value as? CKRecordValue { record[key] = val }
@@ -431,14 +379,12 @@ class iCloudSyncManager {
         extraFields.forEach { record[$0.key] = $0.value }
         return record
     }
-    
     private func generateSecureHash(from input: String) -> String {
         let data = Data(input.utf8)
         let hash = SHA256.hash(data: data)
         return hash.compactMap { String(format: "%02x", $0) }.joined()
     }
 }
-
 extension Array {
     func chunked2(into size: Int) -> [[Element]] {
         stride(from: 0, to: count, by: size).map { Array(self[$0 ..< Swift.min($0 + size, count)]) }

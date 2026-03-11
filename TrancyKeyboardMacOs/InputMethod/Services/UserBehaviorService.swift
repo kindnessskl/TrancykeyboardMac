@@ -23,7 +23,6 @@ class UserBehaviorService {
         let combinedText = sessionCandidates.map { $0.candidate.text }.joined()
         let combinedPinyin = sessionCandidates.map { $0.candidate.pinyin }.joined(separator: " ")
         
-        // Capture data for background task
         let inputMode = firstItem.inputMode
         let translationService = firstItem.translationService
         
