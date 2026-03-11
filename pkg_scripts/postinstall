@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+app_path="/Library/Input Methods/TrancyKeyboardMacOs.app"
+
+echo "Registering TrancyIM..."
+
+# 注册到 LaunchServices (这是让系统在“输入法”列表显示的关键)
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$app_path"
+
+# 强刷系统 UI 服务
+killall -HUP SystemUIServer 2>/dev/null || true
+
+exit 0

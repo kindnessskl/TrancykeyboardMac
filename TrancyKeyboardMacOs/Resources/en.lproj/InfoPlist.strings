@@ -1,0 +1,4 @@
+CFBundleDisplayName = "trancykeyboard";
+CFBundleName = "trancykeyboard";
+"com.trancy.inputmethod.TrancyIM" = "trancykeyboard";
+"com.trancy.inputmethod.TrancyIM.Hans" = "trancykeyboard";

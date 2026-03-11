@@ -1,0 +1,4 @@
+CFBundleDisplayName = "中英输入法";
+CFBundleName = "中英输入法";
+"com.trancy.inputmethod.TrancyIM" = "中英输入法";
+"com.trancy.inputmethod.TrancyIM.Hans" = "中英输入法";

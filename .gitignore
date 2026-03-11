@@ -1,0 +1,38 @@
+# Private Keys and Configuration (IMPORTANT)
+TrancyKeyboardMacOs/Config.xcconfig
+TrancyKeyboardMacOs/InputMethod/Database/RealSettings.swift
+TrancyKeyboardMacOs/InputMethod/Database/DatabaseKey.swift
+
+# Large database files
+*.db
+!translation.db
+!keyboard_demo.db
+
+# Large JSON files
+data-preparation/
+EnglishData/
+
+# Xcode
+*.xcuserstate
+*.xcworkspace
+!*.xcworkspace/contents.xcworkspacedata
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+xcuserdata/
+
+# macOS
+.DS_Store
+
+# Build
+build/
+build_log.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
