@@ -112,17 +112,17 @@ TrancyKeyboard 的开发参考了以下开源项目与数据集：
 # 截图 Demo
 
 
-![demo1](demo/demo1.jpg)
-![demo2](demo/demo2.jpg)
-![demo3](demo/demo3.jpg)
-![demo4](demo/demo4.jpg)
-![demo5](demo/demo5.jpg)
-![demo6](demo/demo6.jpg)
-![demo7](demo/demo7.jpg)
-![demo8](demo/demo8.jpg)
-![demo9](demo/demo9.jpg)
-![demo10](demo/demo10.jpg)
-![demo11](demo/demo11.jpg)
+![demo](demo/demo1.jpg)
+![demo](demo/demo2.jpg)
+![demo](demo/demo3.jpg)
+![demo](demo/demo4.jpg)
+![demo](demo/demo5.jpg)
+![demo](demo/demo6.jpg)
+![demo](demo/demo7.jpg)
+![demo](demo/demo8.jpg)
+![demo](demo/demo9.jpg)
+![demo](demo/demo10.jpg)
+![demo](demo/demo11.jpg)
 
 ## 核心功能
 
@@ -209,6 +209,7 @@ TrancyKeyboard 的开发参考了以下开源项目与数据集：
 **多输入方案支持**
 * 26键全拼
 * 小鹤双拼
+  
 **ios支持**
 * 9键拼音
 * 笔画输入
