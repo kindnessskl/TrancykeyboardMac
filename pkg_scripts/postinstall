@@ -5,10 +5,16 @@ app_path="/Library/Input Methods/TrancyKeyboardMacOs.app"
 
 echo "Registering TrancyIM..."
 
-# 注册到 LaunchServices (这是让系统在“输入法”列表显示的关键)
+# 1. 注册到 LaunchServices
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$app_path"
 
-# 强刷系统 UI 服务
+# 2. 强刷系统 UI 服务
 killall -HUP SystemUIServer 2>/dev/null || true
+
+# 3. 简单的弹窗提示
+CURRENT_USER=$(stat -f "%Su" /dev/console)
+if [ "$CURRENT_USER" != "" ] && [ "$CURRENT_USER" != "root" ]; then
+    sudo -u "$CURRENT_USER" osascript -e 'display dialog "安装已完成！\n\n请重启系统或重新登录，然后前往系统设置手动添加中英输入法。" buttons {"确定"} default button "确定"' >/dev/null 2>&1 &
+fi
 
 exit 0

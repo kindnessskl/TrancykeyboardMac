@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		72C2E2CC2F61A7B2007D1383 /* SQLCipher in Frameworks */ = {isa = PBXBuildFile; productRef = 72C2E2CB2F61A7B2007D1383 /* SQLCipher */; };
+		72CFBEA22F6290D90028EA80 /* readme2.md in Sources */ = {isa = PBXBuildFile; fileRef = 72CFBEA12F6290D60028EA80 /* readme2.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7268F5B92EF6453A00206D79 /* TrancyKeyboardMacOs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrancyKeyboardMacOs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72CFBEA12F6290D60028EA80 /* readme2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme2.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,6 +52,7 @@
 		724381A32E9B9F2C00CC217C = {
 			isa = PBXGroup;
 			children = (
+				72CFBEA12F6290D60028EA80 /* readme2.md */,
 				7268F5BA2EF6453A00206D79 /* TrancyKeyboardMacOs */,
 				724381AD2E9B9F2C00CC217C /* Products */,
 			);
@@ -143,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72CFBEA22F6290D90028EA80 /* readme2.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
