@@ -26,7 +26,7 @@ shoot   snake   她    羊
 
 ---
 
-## 下载 PKG
+## 下载应用
 
 1. 下载最新 Release
 
@@ -36,9 +36,8 @@ https://github.com/kindnessskl/TrancykeyboardMac/releases
 
 2. 运行安装包
 
-```
 TrancyKeyboard.pkg
-```
+
 3. 重启电脑／logout 刷新系统缓存
                                                     
 4. 打开系统设置
@@ -69,7 +68,7 @@ iOS 版本为 **App Store 付费应用（￥10）**，包含：
 * 生成选词历史，单词本学习功能。
 ---
 
-## 开源协议与版本差异
+## 开源协议
 
 本项目采用 **GPL-3.0** 开源协议。
 
@@ -111,7 +110,6 @@ TrancyKeyboard 的开发参考了以下开源项目与数据集：
 
 # 截图 Demo
 
-
 ![demo](demo/demo1.jpg)
 ![demo](demo/demo2.jpg)
 ![demo](demo/demo3.jpg)
@@ -123,6 +121,7 @@ TrancyKeyboard 的开发参考了以下开源项目与数据集：
 ![demo](demo/demo9.jpg)
 ![demo](demo/demo10.jpg)
 ![demo](demo/demo11.jpg)
+
 
 ## 核心功能
 
