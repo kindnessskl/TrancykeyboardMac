@@ -37,7 +37,12 @@ class SharedUserDefaults {
         }
         return userDefaults.bool(forKey: key)
     }
-    
+    func integer(forKey key: String, defaultValue: Int) -> Int {
+        if userDefaults.object(forKey: key) == nil {
+            return defaultValue
+        }
+        return userDefaults.integer(forKey: key)
+    }
     func object(forKey key: String) -> Any? {
         return userDefaults.object(forKey: key)
     }

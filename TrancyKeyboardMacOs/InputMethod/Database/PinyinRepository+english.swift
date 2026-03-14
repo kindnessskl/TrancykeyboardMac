@@ -195,29 +195,32 @@ extension PinyinRepository {
         return (exactRes, (pCands, pTrans), (fCands, fTrans))
     }
 
-    // --- 动态分词支持：查询一组子串中哪些是合法单词 ---
-    func queryValidSubstrings(_ substrings: [String]) -> [String: (word: String, freq: Double)] {
-        guard !substrings.isEmpty else { return [:] }
-        let now = Int(Date().timeIntervalSince1970)
 
-        let placeholders = Array(repeating: "?", count: substrings.count).joined(separator: ",")
-        let sql = "SELECT word, word_normalized, frequency, updated_at FROM english_table WHERE word_normalized IN (\(placeholders))"
+    func fetchEnglishWordEntries(limit: Int = 50000) -> [String: (original: String, freq: Double)] {
+        let sql = """
+        SELECT word, word_normalized, MAX(frequency) as frequency
+        FROM english_table 
+        WHERE is_deleted = 0
+        GROUP BY word_normalized
+        ORDER BY frequency DESC 
+        LIMIT \(limit)
+        """
         
-        let results = database.executeQuery(sql, parameters: substrings)
-        var dict: [String: (word: String, freq: Double)] = [:]
+        let results = self.database.executeQuery(sql)
+        var wordData: [String: (original: String, freq: Double)] = [:]
         
         for row in results {
-            guard let norm = row["word_normalized"] as? String,
-                  let word = row["word"] as? String,
-                  let freq = row["frequency"] as? Int else { continue }
+            guard let original = row["word"] as? String,
+                  let norm = row["word_normalized"] as? String else { continue }
             
-            let updatedAt = row["updated_at"] as? Int ?? 0
-            let score = Double(freq) + 200000000.0 / (1.0 + Double(now - updatedAt) / 28800.0)
+            let normalized = norm.lowercased()
+            let freqValue = row["frequency"]
+            let freq = (freqValue as? NSNumber)?.doubleValue ?? 0.0
             
-            if dict[norm] == nil || score > dict[norm]!.freq {
-                dict[norm] = (word: word, freq: score)
+            if wordData[normalized] == nil {
+                wordData[normalized] = (original, freq)
             }
         }
-        return dict
+        return wordData
     }
 }

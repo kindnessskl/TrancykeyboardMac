@@ -63,6 +63,11 @@ final class TrancyIMEController: IMKInputController, @unchecked Sendable {
         if let inputClient = sender as? (any IMKTextInput) {
             self.currentClient = inputClient
         }
+        
+        self.lastKnownRect = .zero
+        self.candidateUserDelta = .zero
+        self.translationUserDelta = .zero
+        
         keyViewModel.clearInput()
         isShiftToggledEnglish = false
     }

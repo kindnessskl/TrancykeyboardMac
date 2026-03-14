@@ -49,6 +49,7 @@ class InputQueryService {
             self.repository.warmup()
             self.loadEmojiMap()
             self.loadSymbolsMap()
+            EnglishSegmenter.shared.ensureLoaded(from: self.repository)
         }
     }
     
@@ -159,26 +160,24 @@ class InputQueryService {
             finalTranslations.append(contentsOf: pinyinEnglishResult.translations ?? [])
         }
         
-        // 2. 英文查询
         if isEnglishLookupEnabled && !input.isEmpty {
             let englishResult = queryEnglishCandidates(input: cleanInput, hasExactPinyin: hasExactPinyin)
             
-            // 英文结果插入逻辑
             let insertIndex = hasExactPinyin ? min(1, finalCandidates.count) : 0
             for (i, candidate) in englishResult.candidates.enumerated() {
                 let idx = min(insertIndex + i, finalCandidates.count)
                 finalCandidates.insert(candidate, at: idx)
                 finalTranslations.insert(englishResult.translations?[i] ?? [], at: idx)
             }
-        }
 
-        if isEnglishLookupEnabled && finalCandidates.isEmpty && !hasExactPinyin {
-            if let segmentedCand = EnglishSegmenter.shared.segmentToCandidate(input: cleanInput, repository: self.repository) {
-                finalCandidates.append(segmentedCand)
-                finalTranslations.append([])
+            if englishResult.candidates.isEmpty && !hasExactPinyin {
+                if let segmentedCand = EnglishSegmenter.shared.segmentToCandidate(input: cleanInput) {
+                    let idx = min(insertIndex, finalCandidates.count)
+                    finalCandidates.insert(segmentedCand, at: idx)
+                    finalTranslations.insert([], at: idx)
+                }
             }
         }
-        
 
         if isAutoSuggestionEnabled && isChineseLookupEnabled {
             let bestPinyin = allPaths.first(where: { $0.pathType == .exactPinyin })?.pinyin ?? ""
@@ -319,7 +318,7 @@ class InputQueryService {
         if shouldQueryExactAndPrefix {
             if exact == nil && prefix.candidates.isEmpty {
                 lastEnglishQueryState.consecutiveFailures += 1
-                if lastEnglishQueryState.consecutiveFailures >= 3 {
+                if lastEnglishQueryState.consecutiveFailures >= 4 {
                     lastEnglishQueryState.skipExactAndPrefix = true
                 }
             } else {

@@ -38,14 +38,36 @@ class DatabaseMigrator {
 //            }
 //        }
         
+        if let integrityError = checkIntegrity(db: db, name: "main") {
+            print("[DatabaseMigrator] Main database integrity check failed: \(integrityError)")
+            // If main is malformed, we might need to recreate it from bundle, but let's just log for now.
+        }
+        
         var currentVersion = getDatabaseVersion(db: db)
         print("[DatabaseMigrator] Current database version: \(currentVersion)")
         
         if let patch = patchDbPath {
             print("[DatabaseMigrator] Patch path provided: \(patch)")
+            // We can't check patch integrity easily before ATTACH,
+            // but we can check if the file exists and has size > 0
+            if !FileManager.default.fileExists(atPath: patch) {
+                print("[DatabaseMigrator] Error: Patch file does not exist at \(patch)")
+            } else {
+                do {
+                    let attrs = try FileManager.default.attributesOfItem(atPath: patch)
+                    let size = attrs[.size] as? UInt64 ?? 0
+                    print("[DatabaseMigrator] Patch file size: \(size) bytes")
+                    if size == 0 {
+                        print("[DatabaseMigrator] Error: Patch file is empty.")
+                    }
+                } catch {
+                    print("[DatabaseMigrator] Failed to get patch file attributes: \(error)")
+                }
+            }
         } else {
             print("[DatabaseMigrator] Warning: No patch provided for migration.")
         }
+
 
         if currentVersion < 2 {
             if let patch = patchDbPath {
@@ -577,5 +599,25 @@ class DatabaseMigrator {
             return errorStr
         }
         return nil
+    }
+    
+    private func checkIntegrity(db: OpaquePointer?, name: String) -> String? {
+        var statement: OpaquePointer?
+        let sql = "PRAGMA \(name).integrity_check;"
+        
+        if sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK {
+            defer { sqlite3_finalize(statement) }
+            if sqlite3_step(statement) == SQLITE_ROW {
+                if let cString = sqlite3_column_text(statement, 0) {
+                    let result = String(cString: cString)
+                    if result.lowercased() == "ok" {
+                        return nil
+                    } else {
+                        return result
+                    }
+                }
+            }
+        }
+        return "Failed to run integrity check"
     }
 }

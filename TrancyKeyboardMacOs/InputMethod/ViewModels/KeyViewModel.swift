@@ -109,30 +109,30 @@ class KeyViewModel {
     
     private func refreshSettings() {
         let defaults = SharedUserDefaults.shared
-        queryService.isDoublePinyinEnabled = defaults.bool(forKey: "isDoublePinyinEnabled")
-        queryService.isEmojiEnabled = defaults.bool(forKey: "isEmojiEnabled")
-        queryService.isSymbolsEnabled = defaults.bool(forKey: "isSymbolsEnabled")
-        queryService.isAutoSplitEnabled = defaults.bool(forKey: "isAutoSplitEnabled")
-        queryService.isEnglishLookupEnabled = defaults.bool(forKey: "isEnglishLookupEnabled")
+        queryService.isDoublePinyinEnabled = defaults.bool(forKey: "isDoublePinyinEnabled", defaultValue: false)
+        queryService.isEmojiEnabled = defaults.bool(forKey: "isEmojiEnabled", defaultValue: true)
+        queryService.isSymbolsEnabled = defaults.bool(forKey: "isSymbolsEnabled", defaultValue: true)
+        queryService.isAutoSplitEnabled = defaults.bool(forKey: "isAutoSplitEnabled", defaultValue: true)
+        queryService.isEnglishLookupEnabled = defaults.bool(forKey: "isEnglishLookupEnabled", defaultValue: true)
         queryService.isEnglishPrefixLookupEnabled = defaults.bool(forKey: "isEnglishPrefixLookupEnabled", defaultValue: true)
         queryService.isChineseLookupEnabled = defaults.bool(forKey: "isChineseLookupEnabled", defaultValue: true)
-        queryService.isEnglishFuzzyLookupEnabled = defaults.bool(forKey: "isEnglishFuzzyLookupEnabled")
-        userBehaviorService.isSelectionFrequencyEnabled = defaults.bool(forKey: "isSelectionFrequencyEnabled")
-        userBehaviorService.isSelectionRecordEnabled = defaults.bool(forKey: "isSelectionRecordEnabled")
+        queryService.isEnglishFuzzyLookupEnabled = defaults.bool(forKey: "isEnglishFuzzyLookupEnabled", defaultValue: true)
+        userBehaviorService.isSelectionFrequencyEnabled = defaults.bool(forKey: "isSelectionFrequencyEnabled", defaultValue: true)
+        userBehaviorService.isSelectionRecordEnabled = defaults.bool(forKey: "isSelectionRecordEnabled", defaultValue: true)
         PinyinSegmentValidator.shared.isSlidingFuzzyEnabled = defaults.bool(forKey: "isSlidingFuzzyEnabled", defaultValue: true)
-        PinyinSegmentValidator.shared.isAutoCorrectEnabled = defaults.bool(forKey: "isAutoCorrectEnabled")
-        PinyinSegmentValidator.shared.isKeyboardCorrectEnabled = defaults.bool(forKey: "isKeyboardCorrectEnabled")
+        PinyinSegmentValidator.shared.isAutoCorrectEnabled = defaults.bool(forKey: "isAutoCorrectEnabled", defaultValue: true)
+        PinyinSegmentValidator.shared.isKeyboardCorrectEnabled = defaults.bool(forKey: "isKeyboardCorrectEnabled", defaultValue: true)
         
         PinyinCorrectionEngine.shared.refreshSettings()
-        let savedSize = defaults.integer(forKey: candidateFontSizeKey)
+        let savedSize = defaults.integer(forKey: candidateFontSizeKey, defaultValue: 1)
         self.cachedFontSize = CandidateFontSize(rawValue: savedSize) ?? .medium
         
         self.chineseLayoutFont = NSFont.systemFont(ofSize: self.cachedFontSize.chineseSize)
         self.englishLayoutFont = NSFont.systemFont(ofSize: self.cachedFontSize.englishSize)
         
-        let savedSpacing = defaults.integer(forKey: candidateSpacingKey)
+        let savedSpacing = defaults.integer(forKey: candidateSpacingKey, defaultValue: 1)
         self.cachedSpacing = CandidateSpacing(rawValue: savedSpacing) ?? .normal
-        let savedDualMode = defaults.integer(forKey: dualCandidateOutputModeKey)
+        let savedDualMode = defaults.integer(forKey: dualCandidateOutputModeKey, defaultValue: 0)
         let mode = DualCandidateOutputMode(rawValue: savedDualMode) ?? .default
         switch mode {
         case .chineseOnly: activeLayer = .chinese
@@ -420,12 +420,19 @@ class KeyViewModel {
             self.translationService.requestMissingTranslations(for: processedCandidates)
         }
         let bestSegments = segmentationResults.first?.segments ?? []
-        let displayInput = PinyinSegmentValidator.shared.formatRawInput(currentInput, with: bestSegments)
+        var displayInput = PinyinSegmentValidator.shared.formatRawInput(currentInput, with: bestSegments)
+        
+        if let firstCandidate = processedCandidates.first,
+           firstCandidate.text.rangeOfCharacter(from: CharacterSet.letters.inverted) == nil,
+           firstCandidate.text.canBeConverted(to: .ascii) {
+            displayInput = currentInput
+        }
+        
         notifyUIUpdate(displayInput: displayInput, candidates: processedCandidates, translations: currentTranslations)
     }
     
     private func notifyUIUpdate(displayInput: String, candidates: [Candidate], translations: [[String]]) {
-        self.onMarkedTextUpdate?(displayInput)
+        self.onMarkedTextUpdate?(displayInput.lowercased())
         self.displayedCandidates = candidates
         self.calculatePageBreakpoints()
         if self.inputMode == .chinesePreview && !candidates.isEmpty {
